@@ -1,0 +1,4 @@
+export default {
+    appId: 1800633482,
+    appSign:'fe59a6298553228297ac30441ddf314e96519d9c60e5970b4d115e024f1a7c16'
+}
