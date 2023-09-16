@@ -1,16 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Image, TouchableOpacity, Text, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Chat, Games, Home, Live, Profil} from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Search from '../components/Search';
+import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tabs = createBottomTabNavigator();
 
 const LiveButton = ({onPress}: any) => {
+  const [data, setData]: any = useState(null);
+
+  const navigation: any = useNavigation();
+
+  const getDataUser = async () => {
+    const getData = await AsyncStorage.getItem('user_');
+    setData(JSON.parse(getData));
+  };
+  useEffect(() => {
+    getDataUser();
+  }, []);
+  console.log(data);
+  
+
+  const onPressLive = () => {
+    if (data?.isHost == true) {
+      navigation.navigate('HostPage',{
+        userId:String(data.id),
+        username:data.username,
+        liveId:data.liveId
+      })
+    } else {
+      alert('Hanya Host Yang bisa Live!');
+    }
+  };
+  
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={onPressLive}
       style={{
         backgroundColor: '#00F0FF',
         width: 70,
@@ -48,7 +76,7 @@ const TabsNavigation = () => {
           right: 20,
           left: 20,
           borderRadius: 10,
-          backgroundColor: '#ECAF13',
+          backgroundColor: 'white',
         },
       }}>
       <Tabs.Screen
@@ -63,18 +91,23 @@ const TabsNavigation = () => {
       />
       <Tabs.Screen
         options={{
-          headerStyle:{backgroundColor:'#ECAF13'},
-          headerLeft:()=>{
-            return(
-              <View style={{marginLeft:10}}>
-                <View style={{width:45,height:45,backgroundColor:'gray',borderRadius:100}}/>
+          headerStyle: {backgroundColor: '#ECAF13'},
+          headerLeft: () => {
+            return (
+              <View style={{marginLeft: 10}}>
+                <View
+                  style={{
+                    width: 45,
+                    height: 45,
+                    backgroundColor: 'gray',
+                    borderRadius: 100,
+                  }}
+                />
               </View>
-            )
+            );
           },
-          headerRight:()=>{
-            return(
-              <Search/>
-            )
+          headerRight: () => {
+            return <Search />;
           },
           tabBarIcon: focused => {
             return <Image source={require('../../assets/icons/chat.png')} />;
@@ -118,8 +151,8 @@ const TabsNavigation = () => {
                     borderRadius: 40,
                     backgroundColor: '#ECAF13',
                     position: 'absolute',
-                    right:-80,
-                    bottom:0
+                    right: -80,
+                    bottom: 0,
                   }}
                 />
               </View>

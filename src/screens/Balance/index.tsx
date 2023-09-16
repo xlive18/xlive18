@@ -51,7 +51,7 @@ const Balance = () => {
               fontWeight: 'bold',
               color: 'black',
             }}>
-            rp.
+            Rp.
           </Text>
           <Text
             style={{

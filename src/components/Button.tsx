@@ -23,12 +23,14 @@ const styles = StyleSheet.create({
     button:{
         height:45,
         backgroundColor:"#0AE1EF",
-        borderRadius:45,
+        borderRadius:5,
+        width:'100%'
     },
     text:{
         fontSize:20,
         textAlign:"center",
         lineHeight:45,
-        color:"black"
+        color:"black",
+        fontWeight:'bold'
     }
 })

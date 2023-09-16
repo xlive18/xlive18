@@ -1,14 +1,18 @@
-const idUser = 182981281
-const idTalent = 182981281
+const idUser = '182981281'
+const idTalent = '182981281'
 
 const datas = [
   {
     id: idUser,
     username: 'Kuwan',
     email: 'kuwan@gmail.com',
-    numberPhone: '089897677',
+    password:'kuwan22',
+    numberPhone: '+621234512345',
+    verifcode:123,
     gender: 'male',
+    isHost:true,
     isLive:true,
+    liveId:'1234',
     follower: [
       {
         id: idTalent,
@@ -35,10 +39,11 @@ const datas = [
   {
     id: idTalent,
     username: 'Siti',
-    email: 'siti@gmail.com',
-    numberPhone: '839283928392',
+    email: 'aditya112@gmail.com',
+    password:'aditya112',
+    numberPhone: '+621234512345',
     gender: 'female',
-    isLive:true,
+    isHost:false,
     follower: [
       {
         id: idUser,

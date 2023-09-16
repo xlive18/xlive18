@@ -1,15 +1,13 @@
-import React,{useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import StackNavigation from './navigation/Stack';
-import TabsNavigation from './navigation/Tabs';
-import { LogBox } from 'react-native';
+import React from 'react';
+import {AuthContext} from './context/authContext';
+import NavContainer from './navigation/NavContainer';
 
 const App = () => {
-  LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+  
   return (
-    <NavigationContainer>
-      <StackNavigation />
-    </NavigationContainer>
+    <AuthContext>
+      <NavContainer/>
+    </AuthContext>
   );
 };
 

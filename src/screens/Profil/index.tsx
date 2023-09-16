@@ -9,15 +9,27 @@ import {
   SectionList,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MenuProfil from '../../components/MenuProfil';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { Context } from '../../context/authContext';
 
 const Profil = () => {
   const [image, setImage] = useState('');
-console.log(image);
+  const [data, setData] = useState({});
 
+  const {logout} = useContext(Context)
+
+  const getDataUser = async () => {
+    const getData = await AsyncStorage.getItem('user_');
+    setData(JSON.parse(getData));
+  };
+  useEffect(() => {
+    getDataUser();
+  }, []);
 
   const imagePicker = async () => {
     let options: any = {
@@ -30,6 +42,7 @@ console.log(image);
       console.log(res.assets[0].uri);
     });
   };
+
   return (
     <ScrollView style={{marginBottom: 50}}>
       <View
@@ -59,7 +72,12 @@ console.log(image);
                   }}
                 />
               ) : (
-                <Image source={{uri: image}} width={120} height={120} style={{borderRadius:120}}/>
+                <Image
+                  source={{uri: image}}
+                  width={120}
+                  height={120}
+                  style={{borderRadius: 120}}
+                />
               )}
               <TouchableOpacity
                 onPress={() => imagePicker()}
@@ -94,12 +112,12 @@ console.log(image);
               marginTop: 20,
             }}>
             <Text style={{fontWeight: 'bold', color: 'black', fontSize: 15}}>
-              Name User
+              {data?.username}
             </Text>
             <Icon name="mars" size={20} color={'black'} />
           </View>
           <Text style={{color: 'black', fontWeight: '500', marginTop: 10}}>
-            ID: 12345
+            ID: {data?.id}
           </Text>
         </View>
         <View style={{flexDirection: 'row', gap: 10}}>
@@ -113,7 +131,7 @@ console.log(image);
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <View style={{alignItems: 'center'}}>
             <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
-              999
+              {data?.follower?.length}
             </Text>
             <Text
               style={{
@@ -127,7 +145,7 @@ console.log(image);
           </View>
           <View style={{alignItems: 'center'}}>
             <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
-              999
+             {data?.following?.length}
             </Text>
             <Text
               style={{
@@ -136,7 +154,7 @@ console.log(image);
                 fontWeight: 'bold',
                 fontSize: 20,
               }}>
-              followers
+              following
             </Text>
           </View>
         </View>
@@ -221,6 +239,9 @@ console.log(image);
           img={require('../../../assets/icons/setting.png')}
           label="Setting"
         />
+        <TouchableOpacity onPress={logout}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

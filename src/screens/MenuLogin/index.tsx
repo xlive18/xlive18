@@ -1,9 +1,9 @@
-import React from 'react';
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
-import InputForm from '../../components/InputForm';
+import React,{useContext} from 'react';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import Button from '../../components/Button';
 
 const MenuLogin = ({navigation}:{navigation:any}) => {
+
   return (
     <ImageBackground
       source={require('../../../assets/images/background.png')}
