@@ -1,16 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Image, TouchableOpacity, Text, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Chat, Games, Home, Live, Profil} from '../screens';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import Search from '../components/Search';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Context} from '../context/authContext';
+import Icons from '../components/Icons';
+import COLORS from '../components/Colors';
 
 const Tabs = createBottomTabNavigator();
 
 const LiveButton = ({onPress}: any) => {
   const [data, setData]: any = useState(null);
+  const {setVisibleModalLive} = useContext(Context);
 
   const navigation: any = useNavigation();
 
@@ -22,27 +25,27 @@ const LiveButton = ({onPress}: any) => {
     getDataUser();
   }, []);
   console.log(data);
-  
 
   const onPressLive = () => {
     if (data?.isHost == true) {
-      navigation.navigate('HostPage',{
-        userId:String(data.id),
-        username:data.username,
-        liveId:data.liveId
-      })
+      // navigation.navigate('HostPage',{
+      //   userId:String(data.id),
+      //   username:data.username,
+      //   liveId:data.liveId
+      // })
+      setVisibleModalLive(true);
     } else {
       alert('Hanya Host Yang bisa Live!');
     }
   };
-  
+
   return (
     <TouchableOpacity
       onPress={onPressLive}
       style={{
-        backgroundColor: '#00F0FF',
-        width: 70,
-        height: 70,
+        backgroundColor: COLORS.primary,
+        width: 65,
+        height: 65,
         borderRadius: 70,
         top: -30,
         justifyContent: 'center',
@@ -57,10 +60,7 @@ const LiveButton = ({onPress}: any) => {
 
         elevation: 9,
       }}>
-      <Image
-        source={require('../../assets/icons/camera.png')}
-        resizeMode="contain"
-      />
+      <Icons name="camera" />
     </TouchableOpacity>
   );
 };
@@ -81,9 +81,43 @@ const TabsNavigation = () => {
       }}>
       <Tabs.Screen
         options={{
-          headerShown: false,
-          tabBarIcon: focused => {
-            return <Image source={require('../../assets/icons/Home.png')} />;
+          headerLeft: () => {
+            return (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingLeft: 10,
+                }}>
+                <View
+                  style={{
+                    width: 50,
+                    height: 7,
+                    borderRadius: 40,
+                    backgroundColor: '#ECAF13',
+                    position: 'absolute',
+                    right: -67,
+                    bottom: -20,
+                  }}
+                />
+              </View>
+            );
+          },
+          headerRight: () => {
+            return (
+              <View
+                style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+                <TouchableOpacity>
+                  <Icons name="notifikasi" size={30} />
+                </TouchableOpacity>
+                <Image source={require('../../assets/icons/top.png')} />
+              </View>
+            );
+          },
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icons name="home" color={focused ? COLORS.primary : 'gray'} />
+            );
           },
         }}
         name="Beranda"
@@ -94,7 +128,7 @@ const TabsNavigation = () => {
           headerStyle: {backgroundColor: '#ECAF13'},
           headerLeft: () => {
             return (
-              <View style={{marginLeft: 10}}>
+              <View style={{marginLeft:10}}>
                 <View
                   style={{
                     width: 45,
@@ -107,10 +141,12 @@ const TabsNavigation = () => {
             );
           },
           headerRight: () => {
-            return <Search />;
+            return <View style={{marginRight:10}}><Search style={{width:150}}/></View>;
           },
-          tabBarIcon: focused => {
-            return <Image source={require('../../assets/icons/chat.png')} />;
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icons name="chat" color={focused ? COLORS.primary : 'gray'} />
+            );
           },
         }}
         name="Chat"
@@ -128,22 +164,20 @@ const TabsNavigation = () => {
       />
       <Tabs.Screen
         options={{
+          headerTitle:'ALL GAMES',
+          headerTitleStyle:{fontWeight:"800",fontSize:17},
           headerLeft: () => {
             return (
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingLeft: 10,
+                }}>
                 <Image
                   source={require('../../assets/icons/game-console.png')}
-                  style={{top: 5}}
+                  style={{top: 3}}
                 />
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    color: 'black',
-                    right: -10,
-                  }}>
-                  All
-                </Text>
                 <View
                   style={{
                     width: 60,
@@ -151,7 +185,7 @@ const TabsNavigation = () => {
                     borderRadius: 40,
                     backgroundColor: '#ECAF13',
                     position: 'absolute',
-                    right: -80,
+                    right: -75,
                     bottom: 0,
                   }}
                 />
@@ -167,8 +201,10 @@ const TabsNavigation = () => {
               </View>
             );
           },
-          tabBarIcon: focused => {
-            return <Image source={require('../../assets/icons/game.png')} />;
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icons name="game" color={focused ? COLORS.primary : 'gray'} />
+            );
           },
         }}
         name="Games"
@@ -177,8 +213,10 @@ const TabsNavigation = () => {
       <Tabs.Screen
         options={{
           headerShown: false,
-          tabBarIcon: focused => {
-            return <Image source={require('../../assets/icons/profil.png')} />;
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icons color={focused ? COLORS.primary : 'gray'} name="profil" />
+            );
           },
         }}
         name="Profil"

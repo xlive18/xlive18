@@ -1,17 +1,56 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { TextInput } from 'react-native-gesture-handler'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import {StyleSheet, StyleProp, ViewStyle} from 'react-native';
+import React, {useState} from 'react';
+import {TextInput} from 'react-native-gesture-handler';
+import Icons from './Icons';
+import LayoutIcon from './LayoutIcon';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-const Search = () => {
-  return (
-    <View style={{flexDirection:'row',alignItems:'center',backgroundColor:"white",borderRadius:100,gap:5,paddingLeft:5,paddingRight:5,height:'60%',marginRight:10}}>
-      <Icon name='search' size={20}/>
-      <TextInput placeholder='Search' style={{width:150,height:50}}/>
-    </View>
-  )
+interface TProps {
+  style?: StyleProp<ViewStyle>;
 }
 
-export default Search
+const Search = ({style}: TProps) => {
+  const [search, setSearch] = useState('');
 
-const styles = StyleSheet.create({})
+  const clearHandler = () => {
+    setSearch('');
+  };
+
+  console.log(search);
+  
+  return (
+    <SafeAreaView style={styles.container}>
+      <Icons name="search" size={20} color='black' />
+      <TextInput
+      editable
+        placeholder="Search"
+        style={[style, {height: 50}]}
+        value={search}
+        onChangeText={(val) => setSearch(val)}
+      />
+      {search.length > 0 && (
+        <LayoutIcon
+          bg="rgba(0,0,0,.5)"
+          style={{padding: 2}}
+          onPress={clearHandler}>
+          <Icons name="close" color="white" size={10} />
+        </LayoutIcon>
+      )}
+    </SafeAreaView>
+  );
+};
+
+export default Search;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    gap: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    height: 40,
+  },
+});

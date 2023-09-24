@@ -11,17 +11,24 @@ import {
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import IconV6 from 'react-native-vector-icons/FontAwesome6';
+import IconMui from 'react-native-vector-icons/MaterialIcons';
 import MenuProfil from '../../components/MenuProfil';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { Context } from '../../context/authContext';
+import COLORS from '../../components/Colors';
+import ModalMenu from './ModalMenuProfil';
+import Icons from '../../components/Icons';
 
 const Profil = () => {
   const [image, setImage] = useState('');
   const [data, setData] = useState({});
+  const [isVisibleMenu, setIsVisibleMenu] = useState(false);
 
   const {logout} = useContext(Context)
+  const navigation = useNavigation()
 
   const getDataUser = async () => {
     const getData = await AsyncStorage.getItem('user_');
@@ -45,19 +52,23 @@ const Profil = () => {
 
   return (
     <ScrollView style={{marginBottom: 50}}>
+      {/* <ModalMenu visible={isVisibleMenu} setVisible={setIsVisibleMenu}/> */}
       <View
         style={{
-          backgroundColor: '#ECAF13',
+          backgroundColor: COLORS.primary,
           padding: 10,
           paddingRight: 20,
           paddingTop: 20,
         }}>
+          <TouchableOpacity onPress={()=>setIsVisibleMenu(true)}>
+
         <Icon
           name={'ellipsis-v'}
-          size={30}
+          size={25}
           color={'black'}
           style={{textAlign: 'right'}}
-        />
+          />
+          </TouchableOpacity>
 
         <View style={{alignItems: 'center', marginTop: 20}}>
           <View>
@@ -69,8 +80,10 @@ const Profil = () => {
                     height: 120,
                     borderRadius: 120,
                     backgroundColor: '#D9D9D9',
+                    justifyContent:"center",
+                    alignItems:'center'
                   }}
-                />
+                ><Icons name='person' size={60} color='gray'/></View>
               ) : (
                 <Image
                   source={{uri: image}}
@@ -129,7 +142,7 @@ const Profil = () => {
 
       <View style={{padding: 20}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-          <View style={{alignItems: 'center'}}>
+          <TouchableOpacity style={{alignItems: 'center'}}>
             <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
               {data?.follower?.length}
             </Text>
@@ -137,13 +150,12 @@ const Profil = () => {
               style={{
                 borderTopWidth: 1,
                 color: 'black',
-                fontWeight: 'bold',
                 fontSize: 20,
               }}>
-              followers
+              Pengikut
             </Text>
-          </View>
-          <View style={{alignItems: 'center'}}>
+          </TouchableOpacity>
+          <TouchableOpacity style={{alignItems: 'center'}} onPress={()=>navigation.navigate('Following')}>
             <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
              {data?.following?.length}
             </Text>
@@ -151,29 +163,26 @@ const Profil = () => {
               style={{
                 borderTopWidth: 1,
                 color: 'black',
-                fontWeight: 'bold',
                 fontSize: 20,
               }}>
-              following
+              Mengikuti
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
           <TouchableOpacity style={{alignItems: 'center', marginTop: 20}}>
             <View
               style={{
-                backgroundColor: '#ECAF13',
+                backgroundColor: COLORS.primary,
                 width: 70,
                 height: 70,
                 borderRadius: 70,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Image
-                source={require('../../../assets/icons/depo.png')}
-                resizeMode="contain"
-              />
+             <IconV6 name='circle-dollar-to-slot' size={30} color={'white'}/>
+             
             </View>
             <Text style={{fontWeight: 'bold', fontSize: 20, color: 'black'}}>
               Deposit
@@ -184,7 +193,7 @@ const Profil = () => {
             style={{alignItems: 'center', marginTop: 20, right: -10}}>
             <View
               style={{
-                backgroundColor: '#ECAF13',
+                backgroundColor: COLORS.primary,
                 width: 70,
                 height: 70,
                 borderRadius: 70,
@@ -204,7 +213,7 @@ const Profil = () => {
           <TouchableOpacity style={{alignItems: 'center', marginTop: 20}}>
             <View
               style={{
-                backgroundColor: '#ECAF13',
+                backgroundColor: COLORS.primary,
                 width: 70,
                 height: 70,
                 borderRadius: 70,

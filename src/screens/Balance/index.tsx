@@ -44,6 +44,7 @@ const Balance = () => {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
+            marginTop:50
           }}>
           <Text
             style={{

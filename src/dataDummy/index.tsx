@@ -22,7 +22,7 @@ const datas = [
     following:[
         {
             id: idTalent,
-            username:"rijal"
+            username:"ratu"
         }
     ],
     chats:[
@@ -47,14 +47,22 @@ const datas = [
     follower: [
       {
         id: idUser,
-        username:"rijal"
+        username:"ratu"
       },
     ],
     following:[
         {
             id: idUser,
             username:"rijal"
-        }
+        },
+        {
+            id: 123,
+            username:"rizky"
+        },
+        {
+            id: 321,
+            username:"risna"
+        },
     ],
     chats:[
         {

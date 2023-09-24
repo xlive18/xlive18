@@ -14,23 +14,22 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import MenuProfil from '../../components/MenuProfil';
 
 import Icons from 'react-native-vector-icons/Ionicons';
+import COLORS from '../../components/Colors';
+import { useRoute } from '@react-navigation/native';
 
 const ProfilTalent = () => {
+  const route = useRoute()
+  console.log(route.params);
+  
   return (
     <ScrollView style={{marginBottom: 50}}>
       <View
         style={{
-          backgroundColor: '#ECAF13',
+          backgroundColor: COLORS.primary,
           padding: 10,
           paddingRight: 20,
           paddingTop: 20,
         }}>
-        <Icon
-          name={'ellipsis-v'}
-          size={30}
-          color={'black'}
-          style={{textAlign: 'right'}}
-        />
 
         <View style={{alignItems: 'center', marginTop: 20}}>
           <View>
@@ -71,18 +70,13 @@ const ProfilTalent = () => {
               marginTop: 20,
             }}>
             <Text style={{fontWeight: 'bold', color: 'black', fontSize: 15}}>
-              Name User
+              {route.params.data.username}
             </Text>
             <Icon name="mars" size={20} color={'black'} />
           </View>
           <Text style={{color: 'black', fontWeight: '500', marginTop: 10}}>
             ID: 12345
           </Text>
-        </View>
-        <View style={{flexDirection: 'row', gap: 10}}>
-          <Icon name="instagram-square" size={20} color={'black'} />
-          <Icon name="facebook-square" size={20} color={'black'} />
-          <Icon name="twitter-square" size={20} color={'black'} />
         </View>
       </View>
 
@@ -96,7 +90,6 @@ const ProfilTalent = () => {
               style={{
                 borderTopWidth: 1,
                 color: 'black',
-                fontWeight: 'bold',
                 fontSize: 20,
               }}>
               followers
@@ -110,7 +103,6 @@ const ProfilTalent = () => {
               style={{
                 borderTopWidth: 1,
                 color: 'black',
-                fontWeight: 'bold',
                 fontSize: 20,
               }}>
               followers

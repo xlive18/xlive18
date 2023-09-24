@@ -1,36 +1,58 @@
-import { StyleSheet, Text, TouchableOpacity} from 'react-native'
-import React, { ReactNode } from 'react'
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import React, {ReactNode, useContext} from 'react';
+import COLORS from './Colors';
+import {Context} from '../context/authContext';
 
-interface TProps{
-    label:ReactNode
-    onPress?:any
+interface TProps {
+  label: ReactNode;
+  onPress?: any;
+  primary?: boolean;
 }
 
-const Button = (props:TProps) => {
+const Button = (props: TProps) => {
+  const {label, onPress, primary} = props;
 
-    const {label,onPress} = props
+  const {isLoading}:any = useContext(Context);
 
   return (
-  <TouchableOpacity style={styles.button} activeOpacity={.8} onPress={onPress}>
-    <Text style={styles.text}>{label}</Text>
-  </TouchableOpacity>
-  )
-}
+    <TouchableOpacity
+      style={[
+        primary
+          ? {backgroundColor: COLORS.primary}
+          : {
+              backgroundColor: 'white',
+              borderWidth: 2,
+              borderColor: COLORS.primary,
+            },
+        ,
+        {borderRadius: 17, width: '100%',padding:10},
+      ]}
+      activeOpacity={0.8}
+      onPress={onPress}>
+      {isLoading ? (
+        <ActivityIndicator size={'small'} color={!primary?COLORS.primary:"white"} />
+      ) : (
+        <Text
+          style={[styles.text, {color: primary ? 'white' : COLORS.primary}]}>
+          {label}
+        </Text>
+      )}
+    </TouchableOpacity>
+  );
+};
 
-export default Button
+export default Button;
 
 const styles = StyleSheet.create({
-    button:{
-        height:45,
-        backgroundColor:"#0AE1EF",
-        borderRadius:5,
-        width:'100%'
-    },
-    text:{
-        fontSize:20,
-        textAlign:"center",
-        lineHeight:45,
-        color:"black",
-        fontWeight:'bold'
-    }
-})
+  text: {
+    fontSize: 15,
+    textAlign: 'center',
+    // lineHeight: 40,
+    fontWeight: 'bold',
+  },
+});

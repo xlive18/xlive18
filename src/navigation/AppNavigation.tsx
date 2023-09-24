@@ -1,21 +1,34 @@
 import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Splash, Games, Balance, Chat, ProfilTalent} from '../screens';
+import {
+  Splash,
+  Games,
+  Balance,
+  Chat,
+  ProfilTalent,
+  Following,
+} from '../screens';
 
 import Tabs from './Tabs';
-import {Button, Image, Text, View} from 'react-native';
+import {Button, Image, Text, View, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import HostPage from '../screens/Live/HostPage';
-import AudiencePage from '../screens/Live/AudientPage';
+import HostPage from '../screens/Live/Host/HostPage';
+import AudiencePage from '../screens/Live/Audient/AudientPage';
+import TopTabs from './TopTabs';
+import {Context} from '../context/authContext';
+import COLORS from '../components/Colors';
+import Icons from '../components/Icons';
+import LayoutIcon from '../components/LayoutIcon';
 
 const Stack = createStackNavigator();
 
 const AppNavigation = () => {
+  const {data} = useContext(Context);
+
   return (
     <Stack.Navigator>
       <Stack.Group screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="ProfilTalent" component={ProfilTalent} />
       </Stack.Group>
       <Stack.Screen
         name="Balance"
@@ -43,8 +56,16 @@ const AppNavigation = () => {
         options={{headerShown: false}}
         component={Tabs}
       />
-      <Stack.Screen name="Games" component={Games} />
-      <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen
+        name={'Following'}
+        options={{
+          headerTitle: data?.username,
+          headerStyle: {
+            elevation: 0,
+          },
+        }}
+        component={TopTabs}
+      />
 
       <Stack.Screen
         options={{
@@ -59,6 +80,24 @@ const AppNavigation = () => {
         }}
         name="AudiencePage"
         component={AudiencePage}
+      />
+      <Stack.Screen
+        name="ProfilTalent"
+        component={ProfilTalent}
+        options={{
+          headerTitle: '',
+          headerStyle: {
+            elevation: 0,
+            backgroundColor: COLORS.primary,
+          },
+          headerRight: () => {
+            return (
+              <LayoutIcon bg="transparent">
+                  <Icons name={'menu'} size={30} color={'black'} />
+              </LayoutIcon>
+            );
+          },
+        }}
       />
     </Stack.Navigator>
   );

@@ -62,36 +62,6 @@ const Home = () => {
 
   return (
     <ScrollView style={{padding: 20}}>
-      {/* <Text style={{color:'black',fontSize:40}}>{cek}</Text> */}
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <View style={{width: 63}}>
-          <TitleText>POPULER</TitleText>
-          <View
-            style={{
-              width: 40,
-              height: 5,
-              borderRadius: 5,
-              alignSelf: 'flex-end',
-              backgroundColor: '#ECAF13',
-            }}
-          />
-        </View>
-
-        <View style={{flexDirection: 'row', alignItems: 'center', gap: 20}}>
-          <TouchableOpacity>
-            <Image source={require('../../../assets/icons/notif.png')} />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Image source={require('../../../assets/icons/top.png')} />
-          </TouchableOpacity>
-        </View>
-      </View>
 
       <Carousels />
       <WarningText />
@@ -102,7 +72,7 @@ const Home = () => {
           <TitleText>Populer Game</TitleText>
           <View
             style={{
-              width: 40,
+              width: '100%',
               height: 5,
               borderRadius: 5,
               alignSelf: 'flex-end',
@@ -117,6 +87,7 @@ const Home = () => {
           flexWrap: 'wrap',
           justifyContent: 'space-between',
           gap: 10,
+          marginBottom:20
         }}>
         {images.map(el => {
           return <Games image={el.url} />;
@@ -128,7 +99,7 @@ const Home = () => {
           <TitleText>Populer Live</TitleText>
           <View
             style={{
-              width: 40,
+              width: '100%',
               height: 5,
               borderRadius: 5,
               alignSelf: 'flex-end',

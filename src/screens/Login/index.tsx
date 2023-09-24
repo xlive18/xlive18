@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {ImageBackground, StyleSheet, View, Text,Image,TextInput} from 'react-native';
+import {ImageBackground, StyleSheet, View, Text,Image} from 'react-native';
 import Button from '../../components/Button';
 import InputPhoneNumber from '../../components/InputPhoneNumber';
 import datas from '../../dataDummy';
@@ -14,6 +14,7 @@ const Login = ({navigation}: {navigation: any}) => {
   
   return (
     <ImageBackground
+    blurRadius={6}
       source={require('../../../assets/images/background.png')}
       resizeMode="cover"
       style={styles.background}>
@@ -25,7 +26,7 @@ const Login = ({navigation}: {navigation: any}) => {
         <InputForm placeholder="Password" secure={true} onChange={setPassword} value={password}/>
 
        
-        <Button label="LOGIN" onPress={()=>login(username,password)} />
+        <Button label="Sign in" primary onPress={()=>login(username,password)} />
       </View>
     </ImageBackground>
   );
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     gap: 20,
     backgroundColor: 'white',
     padding: 20,
-    borderRadius: 20,
+    borderRadius: 10,
     alignItems:"center"
   },
   textStyle: {

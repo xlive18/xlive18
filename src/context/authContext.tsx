@@ -9,6 +9,7 @@ const AuthContext = (props: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [data, setData] = useState(null);
+  const [visibleModalLive, setVisibleModalLive] = useState(false);
 
   const getDataUser = async () => {
     const getData = await AsyncStorage.getItem('user_');
@@ -27,24 +28,43 @@ const AuthContext = (props: any) => {
   }, [data]);
 
   const login = async (username, password) => {
+    setIsLoading(true);
     if (username == datas[0].username && password == datas[0].password) {
       await AsyncStorage.setItem('user_', JSON.stringify(datas[0]));
-      setIsLogin(true);
+      setTimeout(() => {
+        setIsLogin(true);
+        setIsLoading(false);
+      }, 1000);
     } else if (username == datas[1].username && password == datas[1].password) {
       await AsyncStorage.setItem('user_', JSON.stringify(datas[1]));
-      setIsLogin(true);
+      setTimeout(() => {
+        setIsLogin(true);
+        setIsLoading(false);
+      }, 1000);
     } else {
       alert('error');
+      setIsLoading(false);
     }
   };
   const logout = async () => {
     await AsyncStorage.removeItem('user_');
     setIsLogin(false);
+    setData(null)
   };
 
   return (
     <Context.Provider
-      value={{isLoading, setIsLoading, isLogin, setIsLogin, login, logout}}>
+      value={{
+        isLoading,
+        data,
+        setIsLoading,
+        isLogin,
+        setIsLogin,
+        login,
+        logout,
+        visibleModalLive,
+        setVisibleModalLive,
+      }}>
       {props.children}
     </Context.Provider>
   );

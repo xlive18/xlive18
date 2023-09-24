@@ -4,15 +4,15 @@ import {TouchableOpacity} from 'react-native';
 import {Image} from 'react-native';
 
 const Game = () => {
-  const widthScale = Dimensions.get('screen');
+  const width = (Dimensions.get('window').width - 80) / 3;
   return (
     <TouchableOpacity>
       <Image
         source={{
           uri: 'https://img.freepik.com/free-vector/skull-gaming-with-joy-stick-emblem-modern-style_32991-492.jpg',
         }}
-        width={100}
-        height={80}
+        width={width}
+        height={width}
         style={{borderRadius:20}}
       />
     </TouchableOpacity>

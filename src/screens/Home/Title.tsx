@@ -9,7 +9,7 @@ const Title = ({children}: TProps) => {
   return (
     <View
       style={{
-        width: 92,
+        // width: 92,
         marginTop: 10,
         flexDirection: 'row',
         alignItems: 'center',

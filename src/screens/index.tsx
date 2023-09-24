@@ -9,5 +9,7 @@ import Games from "./Games";
 import Profil from "./Profil";
 import Balance from "./Balance";
 import ProfilTalent from "./ProfilTalent";
+import Following from "./Following";
+import Follower from "./Follower";
 
-export {Splash,MenuLogin,Login,SignUp,Home,Chat,Live,Games,Profil,Balance,ProfilTalent}
+export {Splash,MenuLogin,Login,SignUp,Home,Chat,Live,Games,Profil,Balance,ProfilTalent,Following,Follower}
