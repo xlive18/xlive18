@@ -27,12 +27,8 @@ const LiveButton = ({onPress}: any) => {
   console.log(data);
 
   const onPressLive = () => {
+    navigation.navigate('Live');
     if (data?.isHost == true) {
-      // navigation.navigate('HostPage',{
-      //   userId:String(data.id),
-      //   username:data.username,
-      //   liveId:data.liveId
-      // })
       setVisibleModalLive(true);
     } else {
       alert('Hanya Host Yang bisa Live!');
@@ -128,7 +124,7 @@ const TabsNavigation = () => {
           headerStyle: {backgroundColor: '#ECAF13'},
           headerLeft: () => {
             return (
-              <View style={{marginLeft:10}}>
+              <View style={{marginLeft: 10}}>
                 <View
                   style={{
                     width: 45,
@@ -141,7 +137,11 @@ const TabsNavigation = () => {
             );
           },
           headerRight: () => {
-            return <View style={{marginRight:10}}><Search style={{width:150}}/></View>;
+            return (
+              <View style={{marginRight: 10}}>
+                <Search style={{width: 150}} />
+              </View>
+            );
           },
           tabBarIcon: ({focused}) => {
             return (
@@ -164,8 +164,8 @@ const TabsNavigation = () => {
       />
       <Tabs.Screen
         options={{
-          headerTitle:'ALL GAMES',
-          headerTitleStyle:{fontWeight:"800",fontSize:17},
+          headerTitle: 'ALL GAMES',
+          headerTitleStyle: {fontWeight: '800', fontSize: 17},
           headerLeft: () => {
             return (
               <View
