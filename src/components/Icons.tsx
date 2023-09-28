@@ -14,6 +14,10 @@ const Icons = ({name,color,size}: TProps) => {
       return <Icon name="lock-closed" size={size||20} color={color||'black'} />;
       break;
 
+    case 'no-lock':
+      return <Icon name="lock-open" size={size||20} color={color||'black'} />;
+      break;
+
     case 'menu':
       return <Icon name="ellipsis-vertical" size={size||20} color={color||'black'} />;
       break;

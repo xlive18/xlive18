@@ -6,6 +6,8 @@ import ModalPrivateRoom from './ModalPrivateRoom';
 
 const CustomHostPage = () => {
   const [modalPrivate, setModalPrivate] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(true);
+
 
   const privateRoomButton = () => {
     setModalPrivate(true);
@@ -13,10 +15,10 @@ const CustomHostPage = () => {
 
   return (
     <View style={styles.container}>
-      <ModalPrivateRoom visible={modalPrivate} setVisible={setModalPrivate}/>
+      <ModalPrivateRoom visible={modalPrivate} setVisible={setModalPrivate} isPrivate={isPrivate} setIsPrivate={setIsPrivate}/>
       <View style={styles.buttonRight}>
         <LayoutIcon onPress={privateRoomButton}>
-          <Icons name="lock" />
+          <Icons name={isPrivate?"lock":"no-lock"} />
         </LayoutIcon>
       </View>
     </View>

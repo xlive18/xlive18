@@ -1,19 +1,19 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ZegoUIKitPrebuiltLiveStreaming, {
-  AUDIENCE_DEFAULT_CONFIG, ZegoMenuBarButtonName,
+  AUDIENCE_DEFAULT_CONFIG,
 } from '@zegocloud/zego-uikit-prebuilt-live-streaming-rn';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import credentials from '../../../credentials';
 import CustomAudientPage from './CustomAudientPage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ModalPrivateLive from './ModalPrivateLive'
+import ModalPrivateLive from './ModalPrivateLive';
 
 const AudiencePage = () => {
   const route = useRoute();
-  const navigation:any = useNavigation();
+  const navigation: any = useNavigation();
 
-  const {userId,username,liveId}:any= route.params;
+  const {userId, username, liveId}: any = route.params;
 
   return (
     <View style={styles.container}>
@@ -28,10 +28,14 @@ const AudiencePage = () => {
           onLeaveLiveStreaming: () => {
             navigation.navigate('Home');
           },
-         }}
+          bottomMenuBarConfig: {},
+          translationText: {
+            noHostOnline: 'Live Telah Selesai',
+          },
+        }}
       />
-      <CustomAudientPage/>
-      <ModalPrivateLive/>
+      <CustomAudientPage />
+      <ModalPrivateLive />
     </View>
   );
 };

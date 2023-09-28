@@ -32,14 +32,12 @@ const CardLive = ({dataLive}:any) => {
     getDataUser();
   }, []);
 
-
   const buttonHandler = () => {
     if (dataLive.liveId != '') {
       navigation.navigate('AudiencePage', {userId, username, liveId:dataLive?.liveId});
     }
   };
 
-  console.log(dataLive?.liveId);
   
   return (
     <TouchableOpacity

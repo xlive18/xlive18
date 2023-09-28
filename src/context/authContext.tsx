@@ -52,6 +52,10 @@ const AuthContext = (props: any) => {
     setData(null)
   };
 
+  const visibleHandler = ()=>{
+    setVisibleModalLive(!visibleModalLive)
+  }
+
   return (
     <Context.Provider
       value={{
@@ -64,6 +68,7 @@ const AuthContext = (props: any) => {
         logout,
         visibleModalLive,
         setVisibleModalLive,
+        visibleHandler
       }}>
       {props.children}
     </Context.Provider>

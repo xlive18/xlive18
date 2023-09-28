@@ -12,7 +12,7 @@ const Follower = () => {
       <Search style={{width: '85%'}} />
       <View style={styles.containerCard}>
         {data?.follower.map((el, idx) => {
-          return <CardFollower data={el} key={idx} />;
+          return <CardFollower data={el} key={idx} labelButton='Hapus'/>;
         })}
       </View>
     </View>

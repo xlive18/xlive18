@@ -19,13 +19,12 @@ interface TProps {
 }
 
 const ModalLive = ({visible, setVisible}: TProps) => {
-  const {data, setVisibleModalLive}: any = useContext(Context);
+  const {data, setVisibleModalLive,visibleHandler}: any = useContext(Context);
   const [buttonLiveActive, setButtonLiveActive] = useState(-1);
   const [buttonDmActive, setButtonDmActive] = useState(0);
 
   const [selectedDm, setSelectedDm] = useState(1000);
   const [selectedRoom, setSelectedRoom] = useState('');
-
 
   const navigation: any = useNavigation();
 
@@ -91,14 +90,12 @@ const ModalLive = ({visible, setVisible}: TProps) => {
           animationType="slide"
           transparent={true}
           visible={visible}
-          onRequestClose={() => {
-            setVisible(!visible);
-          }}>
+          onRequestClose={visibleHandler}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Pressable
                 style={styles.buttonClose}
-                onPress={() => setVisible(!visible)}>
+                onPress={visibleHandler}>
                 <LayoutIcon bg='red'>
                   <Icons name="close" />
                 </LayoutIcon>

@@ -7,6 +7,9 @@ import {
   Chat,
   ProfilTalent,
   Following,
+  Follower,
+  Withdraw,
+  Deposit,
 } from '../screens';
 
 import Tabs from './Tabs';
@@ -14,11 +17,13 @@ import {Button, Image, Text, View, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import HostPage from '../screens/Live/Host/HostPage';
 import AudiencePage from '../screens/Live/Audient/AudientPage';
-import TopTabs from './TopTabs';
+import TopTabs from './TopTabsFollower';
 import {Context} from '../context/authContext';
 import COLORS from '../components/Colors';
 import Icons from '../components/Icons';
 import LayoutIcon from '../components/LayoutIcon';
+import TopTabsDeposit from './TopTabsDeposit';
+import TopTabsWithdraw from './TopTabsWithdraw';
 
 const Stack = createStackNavigator();
 
@@ -99,6 +104,8 @@ const AppNavigation = () => {
           },
         }}
       />
+      <Stack.Screen name='Withdraw' component={TopTabsWithdraw}/>
+      <Stack.Screen name='Deposit' component={TopTabsDeposit}/>
     </Stack.Navigator>
   );
 };

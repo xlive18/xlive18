@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Context} from '../context/authContext';
 import Icons from '../components/Icons';
 import COLORS from '../components/Colors';
+import TopTabsDeposit from './TopTabsDeposit';
 
 const Tabs = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ const LiveButton = ({onPress}: any) => {
   const onPressLive = () => {
     if (data?.isHost == true) {
       // navigation.navigate('HostPage',{
-      //   userId:String(data.id),
+      //   userId:String(data?.id),
       //   username:data.username,
       //   liveId:data.liveId
       // })

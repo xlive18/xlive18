@@ -5,7 +5,12 @@ import Button from './Button';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
-const CardFollower = ({data}) => {
+interface TProps{
+  data:any,
+  labelButton:string
+}
+
+const CardFollower = ({data,labelButton}:TProps) => {
   const navigation:any = useNavigation();
 
   const pressHandler = () => {
@@ -38,7 +43,7 @@ const CardFollower = ({data}) => {
         </View>
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text style={{color: 'black'}}>Hapus</Text>
+          <Text style={{color: 'black'}}>{labelButton}</Text>
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

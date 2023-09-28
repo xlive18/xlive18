@@ -65,6 +65,7 @@ const Home = () => {
 
       <Carousels />
       <WarningText />
+     
 
       <Title>
         <Image source={require('../../../assets/icons/game-console.png')} />

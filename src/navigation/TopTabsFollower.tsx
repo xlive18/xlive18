@@ -4,7 +4,7 @@ import { Follower } from '../screens';
 
 const Tab = createMaterialTopTabNavigator();
 
-function TopTabs() {
+function TopTabsFOllower() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Pengikut" component={Follower} />
@@ -13,4 +13,4 @@ function TopTabs() {
   );
 }
 
-export default TopTabs
+export default TopTabsFOllower

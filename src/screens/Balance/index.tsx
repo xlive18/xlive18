@@ -2,8 +2,12 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Invoice from './Invoice';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import IconV6 from 'react-native-vector-icons/FontAwesome6';
 
 const Balance = () => {
+  const navigation = useNavigation()
   const datas = [
     {
       id:1,
@@ -81,7 +85,7 @@ const Balance = () => {
             top: 50,
             alignItems: 'flex-start',
           }}>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity onPress={()=>navigation.navigate("Deposit")} style={{justifyContent: 'center', alignItems: 'center'}}>
             <View
               style={{
                 backgroundColor: '#ECAF13',
@@ -89,17 +93,14 @@ const Balance = () => {
                 overflow: 'hidden',
                 padding: 10,
               }}>
-              <Image
-                source={require('../../../assets/icons/depo.png')}
-                width={80}
-                height={80}
-              />
+                            <IconV6 name="circle-dollar-to-slot" size={30} color={'white'} />
+
             </View>
             <Text style={{color: 'black', fontSize: 15, fontWeight: '600'}}>
               Deposite
             </Text>
-          </View>
-          <View
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate("Withdraw")}
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -121,7 +122,7 @@ const Balance = () => {
             <Text style={{color: 'black', fontSize: 15, fontWeight: '600'}}>
               Withdraw
             </Text>
-          </View>
+          </TouchableOpacity>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <View
               style={{
