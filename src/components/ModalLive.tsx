@@ -29,6 +29,7 @@ const ModalLive = ({visible, setVisible}: TProps) => {
   const navigation: any = useNavigation();
 
   const startHandler = () => {
+    if(data){
     if(buttonLiveActive != -1){
       navigation.navigate('HostPage', {
       userId: String(data.id),
@@ -36,6 +37,7 @@ const ModalLive = ({visible, setVisible}: TProps) => {
       liveId: data.liveId,
     });
     setVisibleModalLive(false);
+    }
     
     
   }

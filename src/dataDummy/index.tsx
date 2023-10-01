@@ -34,6 +34,13 @@ const datas = [
             id:idUser,
             chat:"Iya?"
         }
+    ],
+    bank:[
+      {
+        id:187616,
+        name_bank:"dana",
+        no_rekening:"0857614762828"
+      }
     ]
   },
   {

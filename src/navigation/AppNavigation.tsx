@@ -10,6 +10,7 @@ import {
   Follower,
   Withdraw,
   Deposit,
+  Live,
 } from '../screens';
 
 import Tabs from './Tabs';
@@ -98,7 +99,7 @@ const AppNavigation = () => {
           headerRight: () => {
             return (
               <LayoutIcon bg="transparent">
-                  <Icons name={'menu'} size={30} color={'black'} />
+                <Icons name={'menu'} size={30} color={'black'} />
               </LayoutIcon>
             );
           },
